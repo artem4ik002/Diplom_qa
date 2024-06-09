@@ -16,16 +16,16 @@
 
 - Всего тест-кейсов: 38
 
-  ![all](Images/MySQL/all.jpeg)
+  ![all ](https://github.com/artem4ik002/Diplom_qa/assets/154901672/d587b809-69be-4376-ac49-f9e122109e78)
 
   
 - Успешных тест-кейсов: 23
 
-  ![success](Images/MySQL/success.jpeg)
+  ![success ](https://github.com/artem4ik002/Diplom_qa/assets/154901672/c2cf53ad-9c6e-47ae-b979-bd5cfc368c49)
 
 - Неуспешных тест-кейсов: 15
 
-  ![failed](Images/MySQL/failed.jpeg)
+  ![failed ](https://github.com/artem4ik002/Diplom_qa/assets/154901672/d88406a4-ca98-41cc-8e64-5fac488395fe)
 
 
 ## 3. Процент успешных/неуспешных тест-кейсов
