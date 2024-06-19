@@ -16,7 +16,6 @@ import static ru.netology.data.SQLHelper.*;
 public class PayCreditCard {
     PaymentPage paymentPage = new PaymentPage();
 
-
     @BeforeAll
     public static void setUpAll() {
 
