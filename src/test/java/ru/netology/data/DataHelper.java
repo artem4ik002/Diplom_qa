@@ -1,130 +1,220 @@
 package ru.netology.data;
 
 import com.github.javafaker.Faker;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Value;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import java.util.Random;
-import java.util.stream.Collectors;
 
 public class DataHelper {
-    private DataHelper() {
-    }
+
 
     private static Faker faker = new Faker(new Locale("en"));
     private static Faker fakerRu = new Faker(new Locale("ru"));
 
+    private static String approvedCard = "4444 4444 4444 4441";
+    private static String declinedCard = "4444 4444 4444 4442";
 
-    public static String getCardNumberByStatus(String status) {
-        if (status.equalsIgnoreCase("APPROVED")) {
-            return "4444 4444 4444 4441";
-        } else if (status.equalsIgnoreCase("DECLINED")) {
-            return "4444 4444 4444 4442";
-        } else if (status.equalsIgnoreCase("INVALID")) {
-            return "4444 4444 4444 4443";
-        } else if (status.equalsIgnoreCase("ZERO")) {
-            return "0000 0000 0000 0000";
-        } else if (status.equalsIgnoreCase("FIFTEEN")) {
-            return faker.numerify("#### #### #### ###");
-        }
-        return null;
+
+    private DataHelper() {
     }
 
 
-    public static String generateMonthPlus(int shift) {
-        return LocalDate.now().plusMonths(shift).format(DateTimeFormatter.ofPattern("MM"));
+    public static String getStatusFirstCard() {
+        return "APPROVED";
     }
 
-    public static String getNameContainingHyphen() {
-        return "Владимир Сан-Мартин";
+    public static String getStatusSecondCard() {
+        return "DECLINED";
     }
 
-    public static String getNameOfCardholderInUppercase() {
-        return "АРТЁМ СМИРНОВ";
+    public static String getValidMonth() {
+        return LocalDate.now().format(DateTimeFormatter.ofPattern("MM"));
     }
 
-    public static String getZero() {
+    private static String getPreviousMonth() {
+        return LocalDate.now().minusMonths(1).format(DateTimeFormatter.ofPattern("MM"));
+    }
+
+    private static String getZeroMonth() {
         return "00";
     }
 
-    public static String getMonthOver() {
+    private static String getThirteenMonth() {
         return "13";
     }
 
-    public static String getMonthOneDig() {
+    public static String getValidYear() {
+        return LocalDate.now().format(DateTimeFormatter.ofPattern("yy"));
+    }
+
+    private static String getValidYearPlusOne() {
+        return LocalDate.now().plusYears(1).format(DateTimeFormatter.ofPattern("yy"));
+    }
+
+    private static String getPreviousYear() {
+        return LocalDate.now().minusYears(1).format(DateTimeFormatter.ofPattern("yy"));
+    }
+
+    private static String getPlusSixYear() {
+        return LocalDate.now().plusYears(6).format(DateTimeFormatter.ofPattern("yy"));
+    }
+
+    public static String getHolder() {
+        return faker.name().fullName();
+    }
+
+    public static String getNameRus() {
+        return fakerRu.name().lastName() + " " + fakerRu.name().firstName();
+    }
+
+    private static String getNameEn() {
+        return faker.name().lastName();
+    }
+
+
+    public static String getCVC() {
+        return faker.numerify("###");
+    }
+
+    private static String getTwoNumber() {
+        return faker.numerify("##");
+    }
+
+    private static String getOneNumber() {
         return faker.numerify("#");
     }
 
-    public static String generateYearPlus(int shift) {
-        return LocalDate.now().plusYears(shift).format(DateTimeFormatter.ofPattern("yy"));
+    private static String getFakerNumberCard() {
+        return faker.business().creditCardNumber();
     }
 
-    public static String generateHolder() {
-
-        return faker.name().firstName().toUpperCase(Locale.ROOT) + " "
-                + faker.name().lastName().toUpperCase(Locale.ROOT);
+    private static String getFifteenNumber() {
+        return approvedCard.substring(0, 18);
     }
 
-    public static String generateHolderCyrillic() {
-
-        return fakerRu.name().firstName().toUpperCase(Locale.ROOT) + " "
-                + fakerRu.name().lastName().toUpperCase(Locale.ROOT);
+    private static String getEmptyField() {
+        return " ";
     }
 
-    public static String generateHolderNumeric() {
-        return faker.numerify("########");
+    private static String getSpecialSymbol() {
+        return "@#$%^&*()~-+/*?><|";
     }
 
-    public static String generateHolderOneSymbol() {
-        return faker.letterify("?").toUpperCase(Locale.ROOT);
+    private static String getSurnameAndFirstNameInUppercase() {
+        return "SMIRNOV ARTEM";
     }
 
-    public static String generateHolderSpecChar(int streamSize) {
-        String special = "!@#$^&*";
-        return new Random().ints(streamSize, 0, special.length())
-                .mapToObj(special::charAt)
-                .map(Object::toString)
-                .collect(Collectors.joining());
+    private static String getSurnameOrFirstNameSeparatedByHyphen() {
+        return "Artem Smirnov-Ivanov";
     }
 
-    public static String generateCVC(int amount) {
-        String str = "###";
-        return faker.numerify(str.substring(0, amount));
+
+    @Value
+    public static class CardInfo {
+        String number;
+        String month;
+        String year;
+        String holder;
+        String cvc;
     }
 
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class PaymentEntity {
-        private String id;
-        private int amount;
-        private Timestamp created;
-        private String status;
-        private String transaction_id;
+    public static CardInfo getApprovedCard() {
+        return new CardInfo(approvedCard, getValidMonth(), getValidYear(), getHolder(), getCVC());
     }
 
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class CreditRequestEntity {
-        private String id;
-        private String bank_id;
-        private Timestamp created;
-        private String status;
+    public static CardInfo getDeclinedCard() {
+        return new CardInfo(declinedCard, getValidMonth(), getValidYear(), getHolder(), getCVC());
     }
 
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class OrderEntity {
-        private String id;
-        private Timestamp created;
-        private String credit_id;
-        private String payment_id;
+    public static CardInfo getEmptyCardNumber() {
+        return new CardInfo(getEmptyField(), getValidMonth(), getValidYear(), getHolder(), getCVC());
+    }
+
+    public static CardInfo getOneNumberCardNumber() {
+        return new CardInfo(getOneNumber(), getValidMonth(), getValidYear(), getHolder(), getCVC());
+    }
+
+    public static CardInfo getFifteenNumberCardNumber() {
+        return new CardInfo(getFifteenNumber(), getValidMonth(), getValidYear(), getHolder(), getCVC());
+    }
+
+    public static CardInfo getFakerNumberCardNumber() {
+        return new CardInfo(getFakerNumberCard(), getValidMonth(), getValidYear(), getHolder(), getCVC());
+    }
+
+    public static CardInfo getEmptyMonth() {
+        return new CardInfo(approvedCard, getEmptyField(), getValidYear(), getHolder(), getCVC());
+    }
+
+    public static CardInfo getOneNumberMonth() {
+        return new CardInfo(approvedCard, getOneNumber(), getValidYear(), getHolder(), getCVC());
+    }
+
+    public static CardInfo getPreviousMonthInField() {
+        return new CardInfo(approvedCard, getPreviousMonth(), getValidYear(), getHolder(), getCVC());
+    }
+
+    public static CardInfo getZeroMonthInField() {
+        return new CardInfo(approvedCard, getZeroMonth(), getValidYearPlusOne(), getHolder(), getCVC());
+    }
+
+    public static CardInfo getThirteenMonthInField() {
+        return new CardInfo(approvedCard, getThirteenMonth(), getValidYear(), getHolder(), getCVC());
+    }
+
+    public static CardInfo getEmptyYear() {
+        return new CardInfo(approvedCard, getValidMonth(), getEmptyField(), getHolder(), getCVC());
+    }
+
+    public static CardInfo getPreviousYearInField() {
+        return new CardInfo(approvedCard, getValidMonth(), getPreviousYear(), getHolder(), getCVC());
+    }
+
+    public static CardInfo getPlusSixYearInField() {
+        return new CardInfo(approvedCard, getValidMonth(), getPlusSixYear(), getHolder(), getCVC());
+    }
+
+
+    public static CardInfo getSpecialSymbolInFieldName() {
+        return new CardInfo(approvedCard, getValidMonth(), getValidYear(), getSpecialSymbol(), getCVC());
+    }
+
+    public static CardInfo getNumberInFieldName() {
+        return new CardInfo(approvedCard, getValidMonth(), getValidYear(), getTwoNumber(), getCVC());
+    }
+
+    public static CardInfo getOnlySurnameInFieldName() {
+        return new CardInfo(approvedCard, getValidMonth(), getValidYear(), getNameEn(), getCVC());
+    }
+
+    public static CardInfo getEmptyCVVInFieldCVV() {
+        return new CardInfo(approvedCard, getValidMonth(), getValidYear(), getHolder(), getEmptyField());
+    }
+
+    public static CardInfo getOneNumberInFieldCVV() {
+        return new CardInfo(approvedCard, getValidMonth(), getValidYear(), getHolder(), getOneNumber());
+    }
+
+    public static CardInfo getOTwoNumberInFieldCVV() {
+        return new CardInfo(approvedCard, getValidMonth(), getValidYear(), getHolder(), getTwoNumber());
+    }
+
+    public static CardInfo getRusName() {
+        return new CardInfo(approvedCard, getValidMonth(), getValidYear(), getNameRus(), getCVC());
+    }
+
+    public static CardInfo getNameInUppercase() {
+        return new CardInfo(approvedCard, getValidMonth(), getValidYear(), getSurnameAndFirstNameInUppercase(), getCVC());
+    }
+
+    public static CardInfo getNameSeparatedByHyphen() {
+        return new CardInfo(approvedCard, getValidMonth(), getValidYear(), getSurnameOrFirstNameSeparatedByHyphen(), getCVC());
     }
 }
+
+
+
+
+
