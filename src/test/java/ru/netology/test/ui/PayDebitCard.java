@@ -45,7 +45,7 @@ public class PayDebitCard {
     // Тестовый сценарий №1 БАГ
     @Test
     @SneakyThrows
-    @DisplayName("Покупка кредитной картой со статусом APPROVED, все поля формы заполнены валидными значениями" +
+    @DisplayName("Покупка дебетовой картой со статусом APPROVED, все поля формы заполнены валидными значениями" +
             " и ожидаемой ценой 45_000")
     public void shouldPayDebitValidCard() {
         paymentPage.payDebitCard();
@@ -64,7 +64,8 @@ public class PayDebitCard {
     //Тестовый сценарий №2 БАГ
     @Test
     @SneakyThrows
-    @DisplayName("Покупка кредитной картой со статусом DECLINED, все поля формы заполнены валидными значениями")
+    @DisplayName("Покупка дебетовой картой со статусом DECLINED, " +
+            "все поля формы заполнены валидными значениями")
     void shouldPayDebitDeclinedCard() {
         paymentPage.payDebitCard();
         var info = DataHelper.getDeclinedCard();
@@ -76,7 +77,8 @@ public class PayDebitCard {
 
     //Тестовый сценарий №3
     @Test
-    @DisplayName("Покупка дебетовой картой без заполнения поля карты, остальные поля - валидные данные")
+    @DisplayName("Покупка дебетовой картой без заполнения поля карты, " +
+            "остальные поля формы заполнены валидными значениями")
     void shouldEmptyFieldCardFormDebit() {
         paymentPage.payDebitCard();
         var info = DataHelper.getEmptyCardNumber();
@@ -86,7 +88,8 @@ public class PayDebitCard {
 
     //Тестовый сценарий №4
     @Test
-    @DisplayName("Покупка дебетовой картой при заполнения поля карты одной цифрой, остальные поля - валидные данные")
+    @DisplayName("Покупка дебетовой картой при заполнения поля карты одной цифрой, " +
+            "остальные поля формы заполнены валидными значениями")
     public void shouldOneNumberInFieldCardFormDebit() {
         paymentPage.payDebitCard();
         var info = DataHelper.getOneNumberCardNumber();
@@ -97,7 +100,8 @@ public class PayDebitCard {
 
     //Тестовый сценарий №5
     @Test
-    @DisplayName("Покупка дебетовой картой при заполнения поля карты 15 цифрами, остальные поля - валидные данные")
+    @DisplayName("Покупка дебетовой картой при заполнения поля карты 15 цифрами, " +
+            "остальные поля формы заполнены валидными значениями")
     public void shouldFifteenNumberInFieldCardNumberFormDebit() {
         paymentPage.payDebitCard();
         var info = DataHelper.getFifteenNumberCardNumber();
@@ -107,7 +111,8 @@ public class PayDebitCard {
 
     //Тестовый сценарий №6
     @Test
-    @DisplayName("Покупка картой не из БД, остальные поля - валидные данные")
+    @DisplayName("Покупка картой не из Базы данных, все поля " +
+            "формы заполнены валидными значениями")
     public void shouldFakerCardNumberFormDebit() {
         paymentPage.payDebitCard();
         var info = DataHelper.getFakerNumberCardNumber();
@@ -117,7 +122,8 @@ public class PayDebitCard {
 
     //Тестовый сценарий №7
     @Test
-    @DisplayName("Покупка дебетовой картой без заполнения поля месяц, остальные поля - валидные данные")
+    @DisplayName("Покупка дебетовой картой без заполнения " +
+            "поля месяц, остальные поля формы заполнены валидными значениями")
     public void shouldEmptyFieldMonthFormDebit() {
         paymentPage.payDebitCard();
         var info = getEmptyMonth();
@@ -128,7 +134,7 @@ public class PayDebitCard {
     //Тестовый сценарий №8 БАГ
     @Test
     @DisplayName("Покупка дебетовой картой: в поле месяц нулевой 00(не существующий) месяц" +
-            " остальные поля - валидные данные")
+            " остальные поля формы заполнены валидными значениями")
     public void shouldFieldWithZeroMonthFormDebit() {
         paymentPage.payDebitCard();
         var info = getZeroMonthInField();
@@ -139,7 +145,7 @@ public class PayDebitCard {
     //Тестовый сценарий №9
     @Test
     @DisplayName("Покупка дебетовой картой: в поле месяц тринадцатый (не существующий) месяц" +
-            " остальные поля - валидные данные")
+            " остальные поля формы заполнены валидными значениями")
     public void shouldFieldWithThirteenMonthFormDebit() {
         paymentPage.payDebitCard();
         var info = getThirteenMonthInField();
@@ -149,7 +155,8 @@ public class PayDebitCard {
 
     //Тестовый сценарий №10
     @Test
-    @DisplayName("Покупка дебетовой картой c заполнением поля месяц одной цифрой, остальные поля - валидные данные")
+    @DisplayName("Покупка дебетовой картой c заполнением " +
+            "поля месяц одной цифрой, остальные поля формы заполнены валидными значениями")
     public void shouldOneNumberInFieldMonthFormDebit() {
         paymentPage.payDebitCard();
         var info = getOneNumberMonth();
@@ -159,7 +166,8 @@ public class PayDebitCard {
 
     //Тестовый сценарий №11
     @Test
-    @DisplayName("Покупка дебетовой картой: в поле месяц предыдущий от текущего, остальные поля -валидные данные")
+    @DisplayName("Покупка дебетовой картой: в поле месяц " +
+            "предыдущий от текущего, остальные поля формы заполнены валидными значениями")
     public void shouldFieldWithPreviousMonthFormDebit() {
         paymentPage.payDebitCard();
         var info = getPreviousMonthInField();
@@ -169,7 +177,8 @@ public class PayDebitCard {
 
     //Тестовый сценарий №12
     @Test
-    @DisplayName("Покупка дебетовой картой без заполнения поля год, остальные поля - валидные данные")
+    @DisplayName("Покупка дебетовой картой без заполнения " +
+            "поля год, остальные поля формы заполнены валидными значениями")
     public void shouldEmptyFieldYearFormDebit() {
         paymentPage.payDebitCard();
         var info = getEmptyYear();
@@ -179,8 +188,9 @@ public class PayDebitCard {
 
     //Тестовый сценарий №13
     @Test
-    @DisplayName("Покупка дебетовой картой: заполнение поля год, предыдущим годом от текущего" +
-            " остальные поля - валидные данные")
+    @DisplayName("Покупка дебетовой картой: заполнение " +
+            "поля год, предыдущим годом от текущего" +
+            " остальные поля формы заполнены валидными значениями")
     public void shouldPreviousYearFieldYearFormDebit() {
         paymentPage.payDebitCard();
         var info = getPreviousYearInField();
@@ -191,7 +201,7 @@ public class PayDebitCard {
     //Тестовый сценарий №14
     @Test
     @DisplayName("Покупка дебетовой картой: заполнение поля год, на шесть лет больше чем текущий" +
-            " остальные поля - валидные данные")
+            " остальные поля формы заполнены валидными значениями")
     public void shouldPlusSixYearFieldYearFormDebit() {
         paymentPage.payDebitCard();
         var info = getPlusSixYearInField();
@@ -202,7 +212,8 @@ public class PayDebitCard {
     //Тестовый сценарий №15
 
     @Test
-    @DisplayName("Поле  фамилия и имя в верхнем регистре")
+    @DisplayName("Покупка дебетовой картой: данные в поле фамилия и имя записаны в верхнем " +
+            "регистре, остальные поля формы заполнены валидными значениями")
     public void shouldSurnameAndFirstNameInUppercaseFromDebit() {
         paymentPage.payDebitCard();
         var info = DataHelper.getNameInUppercase();
@@ -212,7 +223,8 @@ public class PayDebitCard {
 
     //Тестовый сценарий №16
     @Test
-    @DisplayName("Поле  фамилия и имя через дефис")
+    @DisplayName("Покупка дебетовой картой: данные в поле  фамилия и имя написано через дефис, " +
+            "остальные поля формы заполнены валидными значениями")
     public void shouldSurnameOrFirstNameSeparatedByHyphenFromDebit() {
         paymentPage.payDebitCard();
         var info = DataHelper.getNameSeparatedByHyphen();
@@ -222,7 +234,8 @@ public class PayDebitCard {
 
     //Тестовый сценарий №17
     @Test
-    @DisplayName("Покупка дебетовой картой: поле владелец пустое, остальные - валидные данные")
+    @DisplayName("Покупка дебетовой картой: поле владелец пустое," +
+            " остальные поля формы заполнены валидными значениями")
     public void shouldEmptyFieldNameFormDebit() {
         paymentPage.payDebitCard();
         var info = getApprovedCard();
@@ -232,7 +245,8 @@ public class PayDebitCard {
 
     //Тестовый сценарий №18 БАГ
     @Test
-    @DisplayName("Покупка дебетовой картой: поле владелец только фамилия, остальные поля - валидные данные")
+    @DisplayName("Покупка дебетовой картой: поле владелец только" +
+            " фамилия, остальные поля формы заполнены валидными значениями")
     public void shouldOnlySurnameFormDebit() {
         paymentPage.payDebitCard();
         var info = DataHelper.getOnlySurnameInFieldName();
@@ -243,18 +257,18 @@ public class PayDebitCard {
     //Тестовый сценарий №19
     @Test
     @DisplayName("Покупка дебетовой картой: заполнение поля владелец рус буквами" +
-            " остальные поля - валидные данные")
+            " остальные поля формы заполнены валидными значениями")
     public void shouldRusNameInFieldNameFormDebit() {
         paymentPage.payDebitCard();
         var info = DataHelper.getRusName();
         paymentPage.sendingValidData(info);
-        //paymentPage.sendingValidDataWithFieldNameError();
+        paymentPage.sendingValidDataWithFieldNameError();
     }
 
     //Тестовый сценарий №20 БАГ цыфры вместо имени
     @Test
     @DisplayName("Покупка дебетовой картой: заполнение  поля владелец цифрами" +
-            " остальные поля - валидные данные")
+            " остальные поля формы заполнены валидными значениями")
     public void shouldNumberInFieldNameFormDebit() {
         paymentPage.payDebitCard();
         var info = getNumberInFieldName();
@@ -265,7 +279,7 @@ public class PayDebitCard {
     //Тестовый сценарий №21 БАГ спец символы можно внести и карта заработает
     @Test
     @DisplayName("Покупка дебетовой картой: заполнение поля владелец спец. символами" +
-            " остальные поля - валидные данные")
+            " остальные поля формы заполнены валидными значениями")
     public void shouldSpecialSymbolInFieldNameFormDebit() {
         paymentPage.payDebitCard();
         var info = getSpecialSymbolInFieldName();
@@ -276,7 +290,7 @@ public class PayDebitCard {
     //Тестовый сценарий №22 ЬАГ при пустом CVV не видет имя владельца
     @Test
     @DisplayName("Покупка дебетовой картой: поле CVV пустое" +
-            " остальные поля - валидные данные")
+            " остальные поля формы заполнены валидными значениями")
     public void shouldEmptyCVVInFieldCVVFormDebit() {
         paymentPage.payDebitCard();
         var info = getEmptyCVVInFieldCVV();
@@ -287,7 +301,7 @@ public class PayDebitCard {
     //Тестовый сценарий №23
     @Test
     @DisplayName("Покупка дебетовой картой: поле CVV одно число" +
-            " остальные поля - валидные данные")
+            " остальные поля формы заполнены валидными значениями")
     public void shouldOneNumberInFieldCVVFormDebit() {
         paymentPage.payDebitCard();
         var info = getOneNumberInFieldCVV();
@@ -298,7 +312,7 @@ public class PayDebitCard {
     //Тестовый сценарий №24
     @Test
     @DisplayName("Покупка дебетовой картой: поле CVV двумя числами" +
-            " остальные поля - валидные данные")
+            " остальные поля формы заполнены валидными значениями")
     public void shouldTwoNumberInFieldCVVАFormDebit() {
         paymentPage.payDebitCard();
         var info = getOTwoNumberInFieldCVV();
