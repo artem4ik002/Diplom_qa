@@ -16,18 +16,14 @@
 
 5. В build.gradle изменить адрес БД: 
 
-- Для работы БД mysql  добавить адрес БД следующим образом:
+- Для работы БД добавить адрес БД следующим образом:
+
+- для MySQL:
+ systemProperty 'datasource', System.getProperty ('datasource', 'jdbc:mysql://localhost:3306/app')
 
 
-
-- systemProperty 'datasource', System.getProperty ('datasource', 'jdbc:mysql://localhost:3306/app')
-
-или 
-
-- Для работы БД postgresql добавить адрес БД следующим образом:
-
-
-- systemProperty 'datasource', System.getProperty ('datasource', 'jdbc:postgresql://localhost:5432/app')
+- для Postgres:
+ systemProperty 'datasource', System.getProperty ('datasource', 'jdbc:postgresql://localhost:5432/app')
 
 
 6. В терминале IntelliJ IDEA выполнить команду для прогона автотестов: 
