@@ -42,7 +42,7 @@ public class PayDebitCard {
         SelenideLogger.removeListener("allure");
     }
 
-    // Тестовый сценарий №1 БАГ
+    // Тестовый сценарий №1
     @Test
     @SneakyThrows
     @DisplayName("Покупка дебетовой картой со статусом APPROVED, все поля формы заполнены валидными значениями" +
@@ -97,7 +97,6 @@ public class PayDebitCard {
         paymentPage.sendingValidDataWithFieldCardNumberError();
     }
 
-
     //Тестовый сценарий №5
     @Test
     @DisplayName("Покупка дебетовой картой при заполнения поля карты 15 цифрами, " +
@@ -131,7 +130,7 @@ public class PayDebitCard {
         paymentPage.sendingValidDataWithFieldMonthError();
     }
 
-    //Тестовый сценарий №8 БАГ
+    //Тестовый сценарий №8
     @Test
     @DisplayName("Покупка дебетовой картой: в поле месяц нулевой 00(не существующий) месяц" +
             " остальные поля формы заполнены валидными значениями")
@@ -243,7 +242,7 @@ public class PayDebitCard {
         paymentPage.sendingValidDataWithFieldNameError();
     }
 
-    //Тестовый сценарий №18 БАГ
+    //Тестовый сценарий №18
     @Test
     @DisplayName("Покупка дебетовой картой: поле владелец только" +
             " фамилия, остальные поля формы заполнены валидными значениями")
@@ -265,7 +264,7 @@ public class PayDebitCard {
         paymentPage.sendingValidDataWithFieldNameError();
     }
 
-    //Тестовый сценарий №20 БАГ цыфры вместо имени
+    //Тестовый сценарий №20
     @Test
     @DisplayName("Покупка дебетовой картой: заполнение  поля владелец цифрами" +
             " остальные поля формы заполнены валидными значениями")
@@ -276,7 +275,7 @@ public class PayDebitCard {
         paymentPage.sendingValidDataWithFieldNameError();
     }
 
-    //Тестовый сценарий №21 БАГ спец символы можно внести и карта заработает
+    //Тестовый сценарий №21
     @Test
     @DisplayName("Покупка дебетовой картой: заполнение поля владелец спец. символами" +
             " остальные поля формы заполнены валидными значениями")
@@ -287,7 +286,7 @@ public class PayDebitCard {
         paymentPage.sendingValidDataWithFieldNameError();
     }
 
-    //Тестовый сценарий №22 ЬАГ при пустом CVV не видет имя владельца
+    //Тестовый сценарий №22
     @Test
     @DisplayName("Покупка дебетовой картой: поле CVV пустое" +
             " остальные поля формы заполнены валидными значениями")

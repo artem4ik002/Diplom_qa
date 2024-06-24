@@ -14,9 +14,8 @@
 `java -jar .\aqa-shop.jar --spring.datasource.url=jdbc:postgresql://localhost:5432/app`
 
 
-5. В build.gradle выбрать адрес БД: 
-
-  Для работы БД добавить адрес БД следующим образом:
+5. В build.gradle выбрать адрес БД следующим образом: 
+ 
 
 - для MySQL:
  `systemProperty 'datasource', System.getProperty ('datasource', 'jdbc:mysql://localhost:3306/app')`
