@@ -8,11 +8,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.netology.data.ApiHelper;
-import ru.netology.data.DataHelper;
+// import ru.netology.data.DataHelper; УДАЛИТЬ
 
 public class ApiTest {
-    DataHelper.CardInfo approvedCardInfo = DataHelper.getApprovedCard();
-    DataHelper.CardInfo declinedCardInfo = DataHelper.getDeclinedCard();
+    // DataHelper.CardInfo approvedCardInfo = DataHelper.getApprovedCard(); УДАЛИТЬ
+    // DataHelper.CardInfo declinedCardInfo = DataHelper.getDeclinedCard(); УДАЛИТЬ
 
     @BeforeAll
     static void setUp() {
@@ -25,24 +25,24 @@ public class ApiTest {
     @DisplayName("Запрос на покупку по карте со статусом APPROVED")
     @Test
     void shouldApprovePayment() {
-        ApiHelper.payDebitCard((approvedCardInfo));
+        ApiHelper.payDebitCard();
     }
 
     @DisplayName("Запрос на кредит по карте со статусом APPROVED")
     @Test
     void shouldApproveCredit() {
-        ApiHelper.payCreditCard(approvedCardInfo);
+        ApiHelper.payCreditCard();
     }
 
     @DisplayName("Запрос на покупку по карте со статусом DECLINED")
     @Test
     void shouldDeclinePayment() {
-        ApiHelper.createPaymentError(declinedCardInfo);
+        ApiHelper.createPaymentError();
     }
 
     @DisplayName("Запрос на кредит по карте со статусом DECLINED")
     @Test
     void shouldDeclineCredit() {
-        ApiHelper.createCreditError(declinedCardInfo);
+        ApiHelper.createCreditError();
     }
 }

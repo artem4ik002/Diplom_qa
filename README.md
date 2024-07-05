@@ -4,14 +4,14 @@
 
 2. Открыть тестовый проект в IntelliJ IDEA
 
-3. В терминале IntelliJ IDEA выполнить команду `docker-compose up -d   `, дождаться подъема контейнеров (*около 1 минуты*).
+3. В терминале IntelliJ IDEA выполнить команду `docker-compose up`, дождаться подъема контейнеров (*около 1 минуты*).
 
 4. В терминале IntelliJ IDEA выполнить команду для запуска приложения:
 - для MySQL:
- `java -jar .\aqa-shop.jar --spring.datasource.url=jdbc:mysql://localhost:3306/app`
+ `java "-Dspring.datasource.url=jdbc:mysql://localhost:3306/app" -jar artifacts/aqa-shop.jar`
  
 - для Postgres:
-`java -jar .\aqa-shop.jar --spring.datasource.url=jdbc:postgresql://localhost:5432/app`
+`java "-Dspring.datasource.url=jdbc:postgresql://localhost:5432/app" -jar artifacts/aqa-shop.jar`
 
 
 5. В build.gradle выбрать адрес БД следующим образом: 
@@ -28,9 +28,9 @@
 6. В терминале IntelliJ IDEA выполнить команду для прогона автотестов: 
 
 - для MySQL:
-` .\gradlew clean test -D dbUrl=jdbc:mysql://localhost:3306/app -D dbUser=app -D dbPass=pass` 
+` ./gradlew clean test -Durl=jdbc:mysql://localhost:3306/app 
 - для Postgres:
-`.\gradlew clean test -D dbUrl=jdbc:postgresql://localhost:5432/app -D dbUser=app -D dbPass=pass` 
+`./gradlew clean test -Durl=jdbc:postgresql://localhost:5432/app 
 
 7. В терминале IntelliJ IDEA выполнить команду для получения отчета:
 `.\gradlew allureServe `

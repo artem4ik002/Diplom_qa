@@ -49,6 +49,8 @@ dependencies {
  // Для работы БД postgresql по умолчанию необходимо добавить адрес БД следующим образом
  // systemProperty 'datasource', System.getProperty ('datasource', 'jdbc:postgresql://localhost:5432/app')
 
+    //systemProperty 'datasource', System.getProperty('datasource', 'http://localhost:9999') не работает
+
 }
 
 

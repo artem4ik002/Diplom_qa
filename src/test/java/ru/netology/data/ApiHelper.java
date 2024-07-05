@@ -20,7 +20,7 @@ public class ApiHelper {
             .log(LogDetail.ALL)
             .build();
 
-    public static void payDebitCard(DataHelper.CardInfo approvedCardInfo) {
+    public static void payDebitCard(){
         cardInfo = DataHelper.getApprovedCard();
         var body = gson.toJson(cardInfo);
         given()
@@ -32,7 +32,7 @@ public class ApiHelper {
                 .statusCode(200);
     }
 
-    public static void payCreditCard(DataHelper.CardInfo approvedCardInfo) {
+    public static void payCreditCard(){
         cardInfo = DataHelper.getApprovedCard();
         given()
                 .spec(requestSpec)
@@ -44,7 +44,7 @@ public class ApiHelper {
 
     }
 
-    public static void createPaymentError(DataHelper.CardInfo declinedCardInfo) {
+    public static void createPaymentError(){
         cardInfo = DataHelper.getDeclinedCard();
         given()
                 .spec(requestSpec)
@@ -55,7 +55,7 @@ public class ApiHelper {
                 .statusCode(200);
     }
 
-    public static void createCreditError(DataHelper.CardInfo declinedCardInfo) {
+    public static void createCreditError(){
         cardInfo = DataHelper.getDeclinedCard();
         given()
                 .spec(requestSpec)
@@ -66,5 +66,3 @@ public class ApiHelper {
                 .statusCode(200);
     }
 }
-
-

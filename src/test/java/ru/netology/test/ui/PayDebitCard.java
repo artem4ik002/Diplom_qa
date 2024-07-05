@@ -61,7 +61,7 @@ public class PayDebitCard {
         assertEquals(expectedAmount, paymentInfo.getAmount());
     }
 
-    //Тестовый сценарий №2 БАГ
+    //Тестовый сценарий №2
     @Test
     @SneakyThrows
     @DisplayName("Покупка дебетовой картой со статусом DECLINED, " +
