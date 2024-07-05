@@ -8,10 +8,10 @@
 
 4. В терминале IntelliJ IDEA выполнить команду для запуска приложения:
 - для MySQL:
- `java -jar .\aqa-shop.jar --spring.datasource.url=jdbc:mysql://localhost:3306/app`
+ `java -jar artifacts/aqa-shop.jar --spring.datasource.url=jdbc:mysql://localhost:3306/app`
  
 - для Postgres:
-`java -jar .\aqa-shop.jar --spring.datasource.url=jdbc:postgresql://localhost:5432/app`
+`java -jar artifacts/aqa-shop.jar --spring.datasource.url=jdbc:postgresql://localhost:5432/app`
 
 
 5. В build.gradle выбрать адрес БД следующим образом: 
