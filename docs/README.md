@@ -28,11 +28,9 @@
 6. В терминале IntelliJ IDEA выполнить команду для прогона автотестов: 
 
 - для MySQL:
-` .\gradlew clean test -D datasource=jdbc:mysql://localhost:3306/app -D datasource.user=app -D datasource.password=pass -D website.url=http://localhost:8080 -D app.url=http://localhost:
-  9999` 
+` .\gradlew clean test -D datasource=jdbc:mysql://localhost:3306/app -D datasource.user=app -D datasource.password=pass -D website.url=http://localhost:8080 -D app.url=http://localhost:9999` 
 - для Postgres:
-`.\gradlew clean test -D datasource=jdbc:postgresql://localhost:5432/app -D datasource.user=app -D datasource.password=pass -D website.url=http://localhost:8080 -D app.url=http://local
-  host:9999` 
+`.\gradlew clean test -D datasource=jdbc:postgresql://localhost:5432/app -D datasource.user=app -D datasource.password=pass -D website.url=http://localhost:8080 -D app.url=http://localhost:9999` 
 
 7. В терминале IntelliJ IDEA выполнить команду для получения отчета:
 `.\gradlew allureServe `
