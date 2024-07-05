@@ -13,14 +13,13 @@ public class ApiHelper {
     private static final Gson gson = new Gson();
     private static DataHelper.CardInfo cardInfo;
     private static final RequestSpecification requestSpec = new RequestSpecBuilder()
-            .setBaseUri("http://localhost")
-            .setPort(9999)
+            .setBaseUri(System.getProperty("app.url"))
             .setAccept(ContentType.JSON)
             .setContentType(ContentType.JSON)
             .log(LogDetail.ALL)
             .build();
 
-    public static void payDebitCard(){
+    public static void payDebitCard() {
         cardInfo = DataHelper.getApprovedCard();
         var body = gson.toJson(cardInfo);
         given()
@@ -32,7 +31,7 @@ public class ApiHelper {
                 .statusCode(200);
     }
 
-    public static void payCreditCard(){
+    public static void payCreditCard() {
         cardInfo = DataHelper.getApprovedCard();
         given()
                 .spec(requestSpec)
@@ -44,7 +43,7 @@ public class ApiHelper {
 
     }
 
-    public static void createPaymentError(){
+    public static void createPaymentError() {
         cardInfo = DataHelper.getDeclinedCard();
         given()
                 .spec(requestSpec)
@@ -55,7 +54,7 @@ public class ApiHelper {
                 .statusCode(200);
     }
 
-    public static void createCreditError(){
+    public static void createCreditError() {
         cardInfo = DataHelper.getDeclinedCard();
         given()
                 .spec(requestSpec)
@@ -66,3 +65,5 @@ public class ApiHelper {
                 .statusCode(200);
     }
 }
+
+

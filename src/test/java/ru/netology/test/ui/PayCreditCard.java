@@ -6,6 +6,7 @@ import lombok.SneakyThrows;
 import org.junit.jupiter.api.*;
 import ru.netology.data.DataHelper;
 import ru.netology.data.SQLHelper;
+import ru.netology.page.MainPage;
 import ru.netology.page.PaymentPage;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -15,6 +16,7 @@ import static ru.netology.data.SQLHelper.*;
 
 public class PayCreditCard {
     PaymentPage paymentPage = new PaymentPage();
+    MainPage mainPage = new MainPage();
 
     @BeforeAll
     public static void setUpAll() {
@@ -25,7 +27,7 @@ public class PayCreditCard {
     @BeforeEach
     public void openPage() {
 
-        open("http://localhost:8080");
+        open(System.getProperty("website.url"));
     }
 
     @AfterEach
@@ -46,11 +48,11 @@ public class PayCreditCard {
     @DisplayName("Покупка кредитной картой со статусом APPROVED, " +
             "все поля формы заполнены валидными значениями")
     void shouldApproveCreditCard() {
-        paymentPage.buyCreditCard();
+        mainPage.buyCreditCard();
         var info = getApprovedCard();
-        paymentPage.sendingValidData(info);
+        paymentPage.sendData(info);
         paymentPage.bankApproved();
-        var expected = DataHelper.getStatusFirstCard();
+        var expected = getStatusFirstCard();
         var creditRequest = getCreditRequestInfo();
         var orderInfo = getOrderInfo();
         assertEquals(expected, getCreditRequestInfo().getStatus());
@@ -63,9 +65,9 @@ public class PayCreditCard {
     @DisplayName("Покупка кредитной картой со статусом DECLINED, " +
             "все поля формы заполнены валидными значениями")
     void shouldPayCreditDeclinedCard() {
-        paymentPage.buyCreditCard();
-        var info = DataHelper.getDeclinedCard();
-        paymentPage.sendingNotValidData(info);
+        mainPage.buyCreditCard();
+        var info = getDeclinedCard();
+        paymentPage.sendData(info);
         paymentPage.bankDeclined();
         var expected = getStatusSecondCard();
         var paymentInfo = getPaymentInfo().getStatus();
@@ -77,9 +79,9 @@ public class PayCreditCard {
     @DisplayName("Покупка кредитной картой без заполнения поля карты, " +
             "остальные поля формы заполнены валидными значениями")
     public void shouldEmptyFieldCardWithCredit() {
-        paymentPage.buyCreditCard();
+        mainPage.buyCreditCard();
         var info = getEmptyCardNumber();
-        paymentPage.sendingValidData(info);
+        paymentPage.sendData(info);
         paymentPage.sendingValidDataWithFieldCardNumberError();
     }
 
@@ -88,9 +90,9 @@ public class PayCreditCard {
     @DisplayName("Покупка кредитной картой при заполнения поля карты одной цифрой, " +
             "остальные поля формы заполнены валидными значениями")
     public void shouldOneNumberInFieldCardNumberWithCredit() {
-        paymentPage.buyCreditCard();
+        mainPage.buyCreditCard();
         var info = getOneNumberCardNumber();
-        paymentPage.sendingValidData(info);
+        paymentPage.sendData(info);
         paymentPage.sendingValidDataWithFieldCardNumberError();
     }
 
@@ -99,9 +101,9 @@ public class PayCreditCard {
     @DisplayName("Покупка кредитной картой: заполнение поля карты 15 цифрами, " +
             "остальные поля формы заполнены валидными значениями")
     public void shouldFifteenNumberInFieldCardNumberWithCredit() {
-        paymentPage.buyCreditCard();
+        mainPage.buyCreditCard();
         var info = getFifteenNumberCardNumber();
-        paymentPage.sendingValidData(info);
+        paymentPage.sendData(info);
         paymentPage.sendingValidDataWithFieldCardNumberError();
     }
 
@@ -110,9 +112,9 @@ public class PayCreditCard {
     @DisplayName("Покупка кредитной картой не из Базы данных, " +
             "остальные поля формы заполнены валидными значениями")
     public void shouldFakerCardInFieldCardNumberWithCredit() {
-        paymentPage.buyCreditCard();
+        mainPage.buyCreditCard();
         var info = getFakerNumberCardNumber();
-        paymentPage.sendingValidData(info);
+        paymentPage.sendData(info);
         paymentPage.sendingValidDataWithFakerCardNumber();
     }
 
@@ -121,9 +123,9 @@ public class PayCreditCard {
     @DisplayName("Покупка кредитной картой без заполнения поля месяц, " +
             "остальные поля формы заполнены валидными значениями")
     public void shouldEmptyFieldMonthWithCredit() {
-        paymentPage.buyCreditCard();
+        mainPage.buyCreditCard();
         var info = getEmptyMonth();
-        paymentPage.sendingValidData(info);
+        paymentPage.sendData(info);
         paymentPage.sendingValidDataWithFieldMonthError();
     }
 
@@ -133,9 +135,9 @@ public class PayCreditCard {
             "нулевой 00(не существующий) месяц остальные поля " +
             "формы заполнены валидными значениями")
     public void shouldFieldWithZeroMonthWithCredit() {
-        paymentPage.buyCreditCard();
+        mainPage.buyCreditCard();
         var info = getZeroMonthInField();
-        paymentPage.sendingValidData(info);
+        paymentPage.sendData(info);
         paymentPage.sendingValidDataWithFieldMonthError();
     }
 
@@ -145,9 +147,9 @@ public class PayCreditCard {
             "формате тринадцатый (не существующий) месяц" +
             " остальные поля формы заполнены валидными значениями")
     public void shouldFieldWithThirteenMonthWithCredit() {
-        paymentPage.buyCreditCard();
+        mainPage.buyCreditCard();
         var info = getThirteenMonthInField();
-        paymentPage.sendingValidData(info);
+        paymentPage.sendData(info);
         paymentPage.sendingValidDataWithFieldMonthError();
     }
 
@@ -156,9 +158,9 @@ public class PayCreditCard {
     @DisplayName("Покупка кредитной картой: поле месяц одной цифрой, " +
             "остальные поля формы заполнены валидными значениями")
     public void shouldOneNumberInFieldMonthWithCredit() {
-        paymentPage.buyCreditCard();
+        mainPage.buyCreditCard();
         var info = getOneNumberMonth();
-        paymentPage.sendingValidData(info);
+        paymentPage.sendData(info);
         paymentPage.sendingValidDataWithFieldMonthError();
     }
 
@@ -167,9 +169,9 @@ public class PayCreditCard {
     @DisplayName("Покупка кредитной картой: в поле месяц предыдущий " +
             "от текущего, остальные поля формы заполнены валидными значениями")
     public void shouldFieldWithPreviousMonthWithCredit() {
-        paymentPage.buyCreditCard();
+        mainPage.buyCreditCard();
         var info = getPreviousMonthInField();
-        paymentPage.sendingValidData(info);
+        paymentPage.sendData(info);
         paymentPage.sendingValidDataWithFieldMonthError();
     }
 
@@ -178,9 +180,9 @@ public class PayCreditCard {
     @DisplayName("Покупка кредитной картой без заполнения поля год, " +
             "остальные поля формы заполнены валидными значениями")
     public void shouldEmptyFieldYearWithCredit() {
-        paymentPage.buyCreditCard();
+        mainPage.buyCreditCard();
         var info = getEmptyYear();
-        paymentPage.sendingValidData(info);
+        paymentPage.sendData(info);
         paymentPage.sendingValidDataWithFieldYearError();
     }
 
@@ -189,9 +191,9 @@ public class PayCreditCard {
     @DisplayName("Покупка кредитной картой: заполнение поля год, предыдущим годом от текущего" +
             " остальные поля формы заполнены валидными значениями")
     public void shouldPreviousYearFieldYearWithCredit() {
-        paymentPage.buyCreditCard();
+        mainPage.buyCreditCard();
         var info = getPreviousYearInField();
-        paymentPage.sendingValidData(info);
+        paymentPage.sendData(info);
         paymentPage.sendingValidDataWithFieldYearError();
     }
 
@@ -200,9 +202,9 @@ public class PayCreditCard {
     @DisplayName("Покупка кредитной картой: заполнение поля год, на шесть лет больше чем текущий" +
             " остальные поля формы заполнены валидными значениями")
     public void shouldPlusSixYearFieldYearWithCredit() {
-        paymentPage.buyCreditCard();
+        mainPage.buyCreditCard();
         var info = getPlusSixYearInField();
-        paymentPage.sendingValidData(info);
+        paymentPage.sendData(info);
         paymentPage.sendingValidDataWithFieldYearError();
     }
 
@@ -211,9 +213,9 @@ public class PayCreditCard {
     @DisplayName("Покупка кредитной картой: данные в поле фамилия и имя записаны в верхнем " +
             "регистре, остальные поля формы заполнены валидными значениями")
     public void shouldSurnameAndFirstNameInUppercaseFromCredit() {
-        paymentPage.buyCreditCard();
+        mainPage.buyCreditCard();
         var info = DataHelper.getNameInUppercase();
-        paymentPage.sendingValidData(info);
+        paymentPage.sendData(info);
         paymentPage.bankApproved();
     }
 
@@ -222,9 +224,9 @@ public class PayCreditCard {
     @DisplayName("Покупка кредитной картой: данные в поле  фамилия и имя написано через дефис, " +
             "остальные поля формы заполнены валидными значениями")
     public void shouldSurnameOrFirstNameSeparatedByHyphenFromCredit() {
-        paymentPage.buyCreditCard();
+        mainPage.buyCreditCard();
         var info = DataHelper.getNameSeparatedByHyphen();
-        paymentPage.sendingValidData(info);
+        paymentPage.sendData(info);
         paymentPage.bankApproved();
     }
 
@@ -233,7 +235,7 @@ public class PayCreditCard {
     @DisplayName("Покупка кредитной картой: поле владелец пустое, " +
             "остальные поля формы заполнены валидными значениями")
     public void shouldEmptyFieldNameWithCredit() {
-        paymentPage.buyCreditCard();
+        mainPage.buyCreditCard();
         var info = getApprovedCard();
         paymentPage.sendingEmptyNameValidData(info);
         paymentPage.sendingValidDataWithFieldNameError();
@@ -244,9 +246,9 @@ public class PayCreditCard {
     @DisplayName("Покупка кредитной картой: заполнение поле владелец только фамилией" +
             " остальные поля формы заполнены валидными значениями")
     public void shouldOnlySurnameInFieldNameWithCredit() {
-        paymentPage.buyCreditCard();
+        mainPage.buyCreditCard();
         var info = getOnlySurnameInFieldName();
-        paymentPage.sendingValidData(info);
+        paymentPage.sendData(info);
         paymentPage.sendingValidDataWithFieldNameError();
     }
 
@@ -255,9 +257,9 @@ public class PayCreditCard {
     @DisplayName("Покупка кредитной картой: заполнение поле владелец русскими буквами" +
             " остальные поля формы заполнены валидными значениями")
     public void shouldRussianNameInFieldNameWithCredit() {
-        paymentPage.buyCreditCard();
+        mainPage.buyCreditCard();
         var info = getRusName();
-        paymentPage.sendingValidData(info);
+        paymentPage.sendData(info);
         paymentPage.sendingValidDataWithFieldNameError();
     }
 
@@ -266,9 +268,9 @@ public class PayCreditCard {
     @DisplayName("Покупка кредитной картой: заполнение поля владелец цифрами" +
             " остальные поля формы заполнены валидными значениями")
     public void shouldNumberInFieldNameWithCredit() {
-        paymentPage.buyCreditCard();
+        mainPage.buyCreditCard();
         var info = getNumberInFieldName();
-        paymentPage.sendingValidData(info);
+        paymentPage.sendData(info);
         paymentPage.sendingValidDataWithFieldNameError();
     }
 
@@ -277,9 +279,9 @@ public class PayCreditCard {
     @DisplayName("Покупка кредитной картой: заполнение поля владелец спец. символами" +
             " остальные поля формы заполнены валидными значениями")
     public void shouldSpecialSymbolInFieldNameWithCredit() {
-        paymentPage.buyCreditCard();
+        mainPage.buyCreditCard();
         var info = getSpecialSymbolInFieldName();
-        paymentPage.sendingValidData(info);
+        paymentPage.sendData(info);
         paymentPage.sendingValidDataWithFieldNameError();
     }
 
@@ -288,9 +290,9 @@ public class PayCreditCard {
     @DisplayName("Покупка кредитной картой: поле CVV пустое" +
             " остальные поля формы заполнены валидными значениями")
     public void shouldEmptyCVVInFieldCVVWithCredit() {
-        paymentPage.buyCreditCard();
+        mainPage.buyCreditCard();
         var info = getEmptyCVVInFieldCVV();
-        paymentPage.sendingValidData(info);
+        paymentPage.sendData(info);
         paymentPage.sendingValidDataWithFieldCVVError();
     }
 
@@ -299,9 +301,9 @@ public class PayCreditCard {
     @DisplayName("Покупка кредитной картой: поле CVV одним числом" +
             " остальные поля формы заполнены валидными значениями")
     public void shouldOneNumberInFieldCVVWithCredit() {
-        paymentPage.buyCreditCard();
+        mainPage.buyCreditCard();
         var info = getOneNumberInFieldCVV();
-        paymentPage.sendingValidData(info);
+        paymentPage.sendData(info);
         paymentPage.sendingValidDataWithFieldCVVError();
     }
 
@@ -310,9 +312,9 @@ public class PayCreditCard {
     @DisplayName("Покупка кредитной картой: поле CVV двумя числами" +
             " остальные поля формы заполнены валидными значениями")
     public void shouldTwoNumberInFieldCVVWithCredit() {
-        paymentPage.buyCreditCard();
+        mainPage.buyCreditCard();
         var info = getOTwoNumberInFieldCVV();
-        paymentPage.sendingValidData(info);
+        paymentPage.sendData(info);
         paymentPage.sendingValidDataWithFieldCVVError();
     }
 
@@ -320,7 +322,7 @@ public class PayCreditCard {
     @Test
     @DisplayName("Покупка кредитной картой: пустое поле")
     void shouldEmptyFormWithCredit() {
-        paymentPage.buyCreditCard();
+        mainPage.buyCreditCard();
         paymentPage.pressButtonForContinue();
         paymentPage.emptyForm();
 

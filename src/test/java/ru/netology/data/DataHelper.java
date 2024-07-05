@@ -29,12 +29,8 @@ public class DataHelper {
         return "DECLINED";
     }
 
-    public static String getValidMonth() {
-        return LocalDate.now().format(DateTimeFormatter.ofPattern("MM"));
-    }
-
-    private static String getPreviousMonth() {
-        return LocalDate.now().minusMonths(1).format(DateTimeFormatter.ofPattern("MM"));
+    public static String getValidMonth(long shiftMonths) {
+        return LocalDate.now().plusMonths(shiftMonths).format(DateTimeFormatter.ofPattern("MM"));
     }
 
     private static String getZeroMonth() {
@@ -45,20 +41,8 @@ public class DataHelper {
         return "13";
     }
 
-    public static String getValidYear() {
-        return LocalDate.now().format(DateTimeFormatter.ofPattern("yy"));
-    }
-
-    private static String getValidYearPlusOne() {
-        return LocalDate.now().plusYears(1).format(DateTimeFormatter.ofPattern("yy"));
-    }
-
-    private static String getPreviousYear() {
-        return LocalDate.now().minusYears(1).format(DateTimeFormatter.ofPattern("yy"));
-    }
-
-    private static String getPlusSixYear() {
-        return LocalDate.now().plusYears(6).format(DateTimeFormatter.ofPattern("yy"));
+    public static String getValidYear(long ShiftYears) {
+        return LocalDate.now().plusYears(ShiftYears).format(DateTimeFormatter.ofPattern("yy"));
     }
 
     public static String getHolder() {
@@ -118,99 +102,100 @@ public class DataHelper {
         String year;
         String holder;
         String cvc;
+
     }
 
     public static CardInfo getApprovedCard() {
-        return new CardInfo(approvedCard, getValidMonth(), getValidYear(), getHolder(), getCVC());
+        return new CardInfo(approvedCard, getValidMonth(0), getValidYear(0), getHolder(), getCVC());
     }
 
     public static CardInfo getDeclinedCard() {
-        return new CardInfo(declinedCard, getValidMonth(), getValidYear(), getHolder(), getCVC());
+        return new CardInfo(declinedCard, getValidMonth(0), getValidYear(0), getHolder(), getCVC());
     }
 
     public static CardInfo getEmptyCardNumber() {
-        return new CardInfo(getEmptyField(), getValidMonth(), getValidYear(), getHolder(), getCVC());
+        return new CardInfo(getEmptyField(), getValidMonth(0), getValidYear(0), getHolder(), getCVC());
     }
 
     public static CardInfo getOneNumberCardNumber() {
-        return new CardInfo(getOneNumber(), getValidMonth(), getValidYear(), getHolder(), getCVC());
+        return new CardInfo(getOneNumber(), getValidMonth(0), getValidYear(0), getHolder(), getCVC());
     }
 
     public static CardInfo getFifteenNumberCardNumber() {
-        return new CardInfo(getFifteenNumber(), getValidMonth(), getValidYear(), getHolder(), getCVC());
+        return new CardInfo(getFifteenNumber(), getValidMonth(0), getValidYear(0), getHolder(), getCVC());
     }
 
     public static CardInfo getFakerNumberCardNumber() {
-        return new CardInfo(getFakerNumberCard(), getValidMonth(), getValidYear(), getHolder(), getCVC());
+        return new CardInfo(getFakerNumberCard(), getValidMonth(0), getValidYear(0), getHolder(), getCVC());
     }
 
     public static CardInfo getEmptyMonth() {
-        return new CardInfo(approvedCard, getEmptyField(), getValidYear(), getHolder(), getCVC());
+        return new CardInfo(approvedCard, getEmptyField(), getValidYear(0), getHolder(), getCVC());
     }
 
     public static CardInfo getOneNumberMonth() {
-        return new CardInfo(approvedCard, getOneNumber(), getValidYear(), getHolder(), getCVC());
+        return new CardInfo(approvedCard, getOneNumber(), getValidYear(0), getHolder(), getCVC());
     }
 
     public static CardInfo getPreviousMonthInField() {
-        return new CardInfo(approvedCard, getPreviousMonth(), getValidYear(), getHolder(), getCVC());
+        return new CardInfo(approvedCard, getValidMonth(-1), getValidYear(0), getHolder(), getCVC());
     }
 
     public static CardInfo getZeroMonthInField() {
-        return new CardInfo(approvedCard, getZeroMonth(), getValidYearPlusOne(), getHolder(), getCVC());
+        return new CardInfo(approvedCard, getZeroMonth(), getValidYear(1), getHolder(), getCVC());
     }
 
     public static CardInfo getThirteenMonthInField() {
-        return new CardInfo(approvedCard, getThirteenMonth(), getValidYear(), getHolder(), getCVC());
+        return new CardInfo(approvedCard, getThirteenMonth(), getValidYear(0), getHolder(), getCVC());
     }
 
     public static CardInfo getEmptyYear() {
-        return new CardInfo(approvedCard, getValidMonth(), getEmptyField(), getHolder(), getCVC());
+        return new CardInfo(approvedCard, getValidMonth(0), getEmptyField(), getHolder(), getCVC());
     }
 
     public static CardInfo getPreviousYearInField() {
-        return new CardInfo(approvedCard, getValidMonth(), getPreviousYear(), getHolder(), getCVC());
+        return new CardInfo(approvedCard, getValidMonth(0), getValidYear(-1), getHolder(), getCVC());
     }
 
     public static CardInfo getPlusSixYearInField() {
-        return new CardInfo(approvedCard, getValidMonth(), getPlusSixYear(), getHolder(), getCVC());
+        return new CardInfo(approvedCard, getValidMonth(0), getValidYear(6), getHolder(), getCVC());
     }
 
 
     public static CardInfo getSpecialSymbolInFieldName() {
-        return new CardInfo(approvedCard, getValidMonth(), getValidYear(), getSpecialSymbol(), getCVC());
+        return new CardInfo(approvedCard, getValidMonth(0), getValidYear(0), getSpecialSymbol(), getCVC());
     }
 
     public static CardInfo getNumberInFieldName() {
-        return new CardInfo(approvedCard, getValidMonth(), getValidYear(), getTwoNumber(), getCVC());
+        return new CardInfo(approvedCard, getValidMonth(0), getValidYear(0), getTwoNumber(), getCVC());
     }
 
     public static CardInfo getOnlySurnameInFieldName() {
-        return new CardInfo(approvedCard, getValidMonth(), getValidYear(), getNameEn(), getCVC());
+        return new CardInfo(approvedCard, getValidMonth(0), getValidYear(0), getNameEn(), getCVC());
     }
 
     public static CardInfo getEmptyCVVInFieldCVV() {
-        return new CardInfo(approvedCard, getValidMonth(), getValidYear(), getHolder(), getEmptyField());
+        return new CardInfo(approvedCard, getValidMonth(0), getValidYear(0), getHolder(), getEmptyField());
     }
 
     public static CardInfo getOneNumberInFieldCVV() {
-        return new CardInfo(approvedCard, getValidMonth(), getValidYear(), getHolder(), getOneNumber());
+        return new CardInfo(approvedCard, getValidMonth(0), getValidYear(0), getHolder(), getOneNumber());
     }
 
     public static CardInfo getOTwoNumberInFieldCVV() {
-        return new CardInfo(approvedCard, getValidMonth(), getValidYear(), getHolder(), getTwoNumber());
+        return new CardInfo(approvedCard, getValidMonth(0), getValidYear(0), getHolder(), getTwoNumber());
     }
 
     public static CardInfo getRusName() {
-        return new CardInfo(approvedCard, getValidMonth(), getValidYear(), getNameRus(), getCVC());
+        return new CardInfo(approvedCard, getValidMonth(0), getValidYear(0), getNameRus(), getCVC());
     }
 
     public static CardInfo getNameInUppercase() {
-        return new CardInfo(approvedCard, getValidMonth(), getValidYear(), getSurnameAndFirstNameInUppercase(), getCVC());
+        return new CardInfo(approvedCard, getValidMonth(0), getValidYear(0), getSurnameAndFirstNameInUppercase(), getCVC());
     }
 
     public static CardInfo getNameSeparatedByHyphen() {
-        return new CardInfo(approvedCard, getValidMonth(), getValidYear(), getSurnameOrFirstNameSeparatedByHyphen(), getCVC());
+        return new CardInfo(approvedCard, getValidMonth(0), getValidYear(0), getSurnameOrFirstNameSeparatedByHyphen(), getCVC());
     }
 }
 

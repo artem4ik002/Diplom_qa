@@ -8,11 +8,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.netology.data.ApiHelper;
-// import ru.netology.data.DataHelper; УДАЛИТЬ
+import ru.netology.data.DataHelper;
 
 public class ApiTest {
-    // DataHelper.CardInfo approvedCardInfo = DataHelper.getApprovedCard(); УДАЛИТЬ
-    // DataHelper.CardInfo declinedCardInfo = DataHelper.getDeclinedCard(); УДАЛИТЬ
+    DataHelper.CardInfo approvedCardInfo = DataHelper.getApprovedCard();
+    DataHelper.CardInfo declinedCardInfo = DataHelper.getDeclinedCard();
 
     @BeforeAll
     static void setUp() {

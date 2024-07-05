@@ -9,15 +9,22 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class MainPage {
 
+    public void payDebitCard() {
+        buttonBuy.click();
+        buttonDebit.shouldBe(visible);
+    }
 
+    public void buyCreditCard() {
+        buttonBuyWithCredit.click();
+        buttonCredit.shouldBe(visible);
+    }
 
+    public SelenideElement buttonBuy = $x("//span[text()='Купить']//ancestor::button");
+    public SelenideElement buttonBuyWithCredit = $x("//span[text()='Купить в кредит']//ancestor::button");
 
+    public SelenideElement buttonDebit = $(withText("Оплата по карте"));
+    public SelenideElement buttonCredit = $(withText("Кредит по данным карты"));
 
-    public static SelenideElement buttonBuy = $x("//span[text()='Купить']//ancestor::button");
-    public static SelenideElement buttonBuyWithCredit = $x("//span[text()='Купить в кредит']//ancestor::button");
-
-    public static SelenideElement buttonDebit = $(withText("Оплата по карте"));
-    public static SelenideElement buttonCredit = $(withText("Кредит по данным карты"));
 
 
 }

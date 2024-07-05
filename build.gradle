@@ -35,21 +35,28 @@ dependencies {
     testImplementation 'io.qameta.allure:allure-rest-assured:2.27.0'
     testImplementation 'io.rest-assured:rest-assured:5.4.0'
     testImplementation 'com.google.code.gson:gson:2.11.0'
+    compileOnly 'org.projectlombok:lombok:1.18.34'
+    annotationProcessor 'org.projectlombok:lombok:1.18.34'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.34'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
 }
 
     test {
     useJUnitPlatform()
+
+    systemProperty 'app.url', System.getProperty('app.url', 'http://localhost:9999')
+    systemProperty 'website.url', System.getProperty('website.url', 'http://localhost:8080')
+
     systemProperty 'selenide.headless', System.getProperty('selenide.headless')
     systemProperty 'datasource.user', System.getProperty('datasource.user', 'app')
     systemProperty 'datasource.password', System.getProperty('datasource.password', 'pass')
 
  // Для работы БД mysql по умолчанию необходимо добавить адрес БД следующим образом
-    systemProperty 'datasource', System.getProperty ('datasource', 'jdbc:mysql://localhost:3306/app')
+//    systemProperty 'datasource', System.getProperty ('datasource', 'jdbc:mysql://localhost:3306/app')
 
  // Для работы БД postgresql по умолчанию необходимо добавить адрес БД следующим образом
- // systemProperty 'datasource', System.getProperty ('datasource', 'jdbc:postgresql://localhost:5432/app')
-
-    //systemProperty 'datasource', System.getProperty('datasource', 'http://localhost:9999') не работает
+  systemProperty 'datasource', System.getProperty ('datasource', 'jdbc:postgresql://localhost:5432/app')
 
 }
 
